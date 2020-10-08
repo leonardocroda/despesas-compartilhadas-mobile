@@ -40,20 +40,7 @@ export default class App extends React.Component {
 
     return (
       <Container>
-        {/* <Header>
-          <Left>
-            <Button>
-              <Icon name="menu" />
-            </Button>
-          </Left>
-          <Body>
-            <Title>Header</Title>
-          </Body>
-          <Right />
-        </Header> */}
-        {/* <Content> */}
         <Routes />
-        {/* </Content> */}
       </Container>
     );
   }

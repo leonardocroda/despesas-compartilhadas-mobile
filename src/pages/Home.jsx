@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { TextInput, View, Text, KeyboardAvoidingView } from 'react-native';
 import { RectButton } from 'react-native-gesture-handler';
+import TopBar from '../components/TopBar';
 
 export default function Home({ navigation }) {
   const [expense, expenseChange] = React.useState('Despesa');
@@ -11,6 +12,7 @@ export default function Home({ navigation }) {
       style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}
       behavior={Platform.OS === 'ios' ? 'padding' : undefined}
     >
+      <TopBar navigation={navigation} title="Criar Despesa" />
       <Text style={{ fontSize: 26, marginBottom: 15 }}>Registrar Despesa</Text>
       <TextInput
         style={{
