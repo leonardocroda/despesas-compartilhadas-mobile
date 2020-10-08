@@ -1,10 +1,11 @@
 import * as React from 'react';
+import { StyleSheet } from 'react-native';
 import { Body, Button, Header, Icon, Left, Right, Title } from 'native-base';
 
 export default function TopBar(props) {
   return (
     <>
-      <Header style={{ backgroundColor: 'red' }} androidStatusBarColor="red">
+      <Header style={styles.header} androidStatusBarColor="red">
         <Left>
           <Button transparent onPress={() => props.navigation.toggleDrawer()}>
             <Icon name="menu" />
@@ -18,3 +19,7 @@ export default function TopBar(props) {
     </>
   );
 }
+
+const styles = StyleSheet.create({
+  header: { backgroundColor: 'red' },
+});

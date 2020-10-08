@@ -1,17 +1,6 @@
 import React from 'react';
 import { AppLoading } from 'expo';
-import {
-  Body,
-  Button,
-  Container,
-  Content,
-  Header,
-  Icon,
-  Left,
-  Right,
-  Text,
-  Title,
-} from 'native-base';
+import { Container } from 'native-base';
 import * as Font from 'expo-font';
 import { Ionicons } from '@expo/vector-icons';
 import Routes from './src/routes';

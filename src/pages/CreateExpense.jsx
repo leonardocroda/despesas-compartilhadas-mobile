@@ -1,4 +1,5 @@
 import React from 'react';
+import { StyleSheet } from 'react-native';
 import {
   Container,
   Content,
@@ -27,14 +28,7 @@ export default function CreateExpense({ navigation }) {
             <Input />
           </Item>
         </Form>
-        <View
-          style={{
-            marginTop: 30,
-            flex: 1,
-            flexDirection: 'row',
-            justifyContent: 'space-evenly',
-          }}
-        >
+        <View style={styles.buttons}>
           <Button block light style={{ width: '45%' }}>
             <Text>Cancelar</Text>
           </Button>
@@ -46,3 +40,12 @@ export default function CreateExpense({ navigation }) {
     </Container>
   );
 }
+
+const styles = StyleSheet.create({
+  buttons: {
+    marginTop: 30,
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
+  },
+});
