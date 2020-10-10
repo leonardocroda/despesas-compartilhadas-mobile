@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { StyleSheet } from 'react-native';
 import {
   Container,
@@ -16,24 +16,20 @@ import {
   Icon,
   Header,
 } from 'native-base';
-import api from '../services/api';
+import AuthContext from '../contexts/auth';
+// import api from '../services/api';
 
 export default function SignIn({ navigation }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const submitForm = async () => {
-    //  const data = {
-    //    name: name,
-    //  };
-    //  try {
-    //    await api.post('groups', data);
-    //    console.log('grupo criado');
-    //    navigation.navigate('Cadastrar Despesa');
-    //  } catch (e) {
-    //    console.log(e);
-    //  }
-  };
+  const { signed, signIn } = useContext(AuthContext);
+
+  // console.log(signed);
+
+  async function handleSignIn() {
+    await signIn(email, password);
+  }
 
   return (
     <>
@@ -58,7 +54,7 @@ export default function SignIn({ navigation }) {
             />
           </Item>
           <View style={styles.buttons}>
-            <Button block style={styles.button} onPress={submitForm}>
+            <Button block style={styles.button} onPress={handleSignIn}>
               <Text>Entrar</Text>
             </Button>
           </View>

@@ -4,6 +4,8 @@ import { Container } from 'native-base';
 import * as Font from 'expo-font';
 import { Ionicons } from '@expo/vector-icons';
 import Routes from './src/routes';
+import { AuthProvider } from './src/contexts/auth';
+import { NavigationContainer } from '@react-navigation/native';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -28,9 +30,13 @@ export default class App extends React.Component {
     }
 
     return (
-      <Container>
-        <Routes />
-      </Container>
+      <NavigationContainer>
+        <AuthProvider>
+          <Container>
+            <Routes />
+          </Container>
+        </AuthProvider>
+      </NavigationContainer>
     );
   }
 }
