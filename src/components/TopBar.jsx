@@ -5,7 +5,8 @@ import { Body, Button, Header, Icon, Left, Right, Title } from 'native-base';
 export default function TopBar(props) {
   return (
     <>
-      <Header style={styles.header} androidStatusBarColor="red">
+      <Header>
+        {/* androidStatusBarColor="red"> */}
         <Left>
           <Button transparent onPress={() => props.navigation.toggleDrawer()}>
             <Icon name="menu" />
