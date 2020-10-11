@@ -9,11 +9,6 @@ import {
   Button,
   Text,
   View,
-  Header,
-  Left,
-  Title,
-  Right,
-  Icon,
 } from 'native-base';
 import api from '../services/api';
 
@@ -28,9 +23,7 @@ export default function SignUp({ navigation }) {
       password: password,
     };
     try {
-      await api.post('users', data);
-      console.log('usuário criado');
-      navigation.navigate('Cadastrar Despesa');
+      api.users.create(data).then(() => navigation.navigate('Entrar'));
     } catch (e) {
       console.log(e);
     }

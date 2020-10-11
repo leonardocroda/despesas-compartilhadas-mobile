@@ -8,7 +8,8 @@ import {
 import AuthContext from '../contexts/auth';
 
 import CreateExpense from '../pages/CreateExpense';
-import CreateGroup from '../pages/CreateGroup';
+import CreateGroup from '../pages/groups/CreateGroup';
+import JoinGroup from '../pages/groups/JoinGroup';
 
 function CustomDrawerContent(props) {
   const { signOut } = useContext(AuthContext);
@@ -32,12 +33,13 @@ const Drawer = createDrawerNavigator();
 export default function AppRoutes() {
   return (
     <Drawer.Navigator
-      initialRouteName="Cadastrar Despesa"
+      initialRouteName="Cadastrar uma Despesa"
       drawerContentOptions={{ activeTintColor: '#3F51B5' }}
       drawerContent={(props) => <CustomDrawerContent {...props} />}
     >
-      <Drawer.Screen name="Cadastrar Despesa" component={CreateExpense} />
-      <Drawer.Screen name="Criar Grupo" component={CreateGroup} />
+      <Drawer.Screen name="Cadastrar uma Despesa" component={CreateExpense} />
+      <Drawer.Screen name="Entrar em um Grupo" component={JoinGroup} />
+      <Drawer.Screen name="Criar um Grupo" component={CreateGroup} />
     </Drawer.Navigator>
   );
 }

@@ -15,7 +15,7 @@ export default function TopBar(props) {
         <Body>
           <Title>{props.title}</Title>
         </Body>
-        <Right></Right>
+        {/* <Right></Right> */}
       </Header>
     </>
   );

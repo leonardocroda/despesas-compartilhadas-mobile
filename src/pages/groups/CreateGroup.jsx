@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { StyleSheet } from 'react-native';
 import {
   Container,
@@ -11,29 +11,27 @@ import {
   Text,
   View,
 } from 'native-base';
-import TopBar from '../components/TopBar';
-import api from '../services/api';
+import TopBar from '../../components/TopBar';
+import api from '../../services/api';
+import AuthContext from '../../contexts/auth';
 
 export default function CreateGroup({ navigation }) {
   const [name, setName] = useState('');
+  const { user } = useContext(AuthContext);
 
   const submitForm = async () => {
     const data = {
       name: name,
     };
 
-    try {
-      await api.post('groups', data);
-      console.log('grupo criado');
-      navigation.navigate('Cadastrar Despesa');
-    } catch (e) {
-      console.log(e);
-    }
+    const group = await api.groups.create(data);
+    await api.groups.addUser(group.id, user.id);
+    navigation.navigate('Cadastrar uma Despesa');
   };
 
   return (
     <Container>
-      <TopBar navigation={navigation} title="Criar  Group" />
+      <TopBar navigation={navigation} title="Criar um Grupo" />
       <Content>
         <Form style={styles.form}>
           <Item floatingLabel>

@@ -2,7 +2,6 @@ import React, { useState, useContext } from 'react';
 import { StyleSheet } from 'react-native';
 import {
   Container,
-  Content,
   Form,
   Item,
   Input,
@@ -10,22 +9,14 @@ import {
   Button,
   Text,
   View,
-  Left,
-  Title,
-  Right,
-  Icon,
-  Header,
 } from 'native-base';
 import AuthContext from '../contexts/auth';
-// import api from '../services/api';
 
 export default function SignIn({ navigation }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const { signed, signIn } = useContext(AuthContext);
-
-  // console.log(signed);
+  const { signIn } = useContext(AuthContext);
 
   async function handleSignIn() {
     await signIn(email, password);
