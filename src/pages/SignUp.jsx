@@ -38,21 +38,6 @@ export default function SignUp({ navigation }) {
 
   return (
     <>
-      <Header>
-        <Left>
-          <Title>Criar Conta</Title>
-        </Left>
-        <Right>
-          <Button
-            transparent
-            onPress={() => {
-              navigation.navigate('Entrar');
-            }}
-          >
-            <Icon name="arrow-back" />
-          </Button>
-        </Right>
-      </Header>
       <Container>
         <Form style={styles.form}>
           <Item floatingLabel>

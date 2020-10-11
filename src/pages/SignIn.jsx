@@ -33,12 +33,6 @@ export default function SignIn({ navigation }) {
 
   return (
     <>
-      <Header>
-        <Left>
-          <Title>Entrar</Title>
-        </Left>
-        <Right></Right>
-      </Header>
       <Container>
         <Form style={styles.form}>
           <Item floatingLabel>
