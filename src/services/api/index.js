@@ -1,4 +1,5 @@
 import axios from 'axios';
+
 const instance = axios.create({
   baseURL: 'http://10.0.2.2:3030',
 });
@@ -40,6 +41,11 @@ const api = (axiosInstance) => {
       create: async (data) =>
         await axiosInstance.post(endpoints.users.create, data),
       login: async (data) => axiosInstance.post(endpoints.users.login, data),
+      groups: async (user) => axiosInstance.get(`users/${user}/groups`),
+    },
+    expenses: {
+      create: async (type, owner, data) =>
+        await axiosInstance.post(`${type}/owner/${owner}/expenses`, data),
     },
   };
 };

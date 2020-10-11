@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { StyleSheet } from 'react-native';
 import {
   Container,
@@ -13,12 +13,36 @@ import {
   Picker,
   Icon,
 } from 'native-base';
+import AuthContext from '../contexts/auth';
 import TopBar from '../components/TopBar';
+import api from '../services/api';
 
 export default function CreateExpense({ navigation }) {
   const [expenseName, setExpenseName] = useState('');
   const [expenseValue, setExpenseValue] = useState('');
-  const [type, setType] = useState('');
+  const [type, setType] = useState('user');
+  const [groups, setGroups] = useState([]);
+  const [group, setGroup] = useState('');
+
+  const { user } = useContext(AuthContext);
+
+  useEffect(() => {
+    api.users.groups(user.id).then((response) => setGroups(response.data));
+  }, [type]);
+
+  const createExpense = async () => {
+    const data = {
+      name: expenseName,
+      value: parseFloat(expenseValue),
+    };
+    if (type == 'user') await api.expenses.create(type, user.id, data);
+    if (type == 'group') await api.expenses.create(type, group, data);
+    setExpenseName('');
+    setExpenseValue('');
+    setType('user');
+    setGroups([]);
+    setGroup('');
+  };
 
   return (
     <Container>
@@ -37,6 +61,7 @@ export default function CreateExpense({ navigation }) {
             <Input
               value={expenseValue}
               onChangeText={(value) => setExpenseValue(value)}
+              keyboardType="numeric"
             />
           </Item>
           <View style={styles.picker}>
@@ -58,13 +83,39 @@ export default function CreateExpense({ navigation }) {
                 <Picker.Item label="de um Grupo" value="group" />
               </Picker>
             </Item>
+            {type == 'group' && (
+              <>
+                <Text style={styles.pickerLabel}>Qual grupo?</Text>
+
+                <Item picker>
+                  <Picker
+                    mode="dropdown"
+                    iosIcon={<Icon name="arrow-down" />}
+                    placeholder="Grupo"
+                    placeholderStyle={{ color: '#bfc6ea' }}
+                    placeholderIconColor="#007aff"
+                    itemStyle={styles.pickerItem}
+                    selectedValue={group}
+                    onValueChange={(value) => setGroup(value)}
+                  >
+                    {groups.map((group) => (
+                      <Picker.Item
+                        key={group.id}
+                        label={group.name}
+                        value={group.id}
+                      />
+                    ))}
+                  </Picker>
+                </Item>
+              </>
+            )}
           </View>
         </Form>
         <View style={styles.buttons}>
           <Button block light style={{ width: '45%' }}>
             <Text>Cancelar</Text>
           </Button>
-          <Button block style={{ width: '45%' }}>
+          <Button block onPress={createExpense} style={{ width: '45%' }}>
             <Text>Salvar</Text>
           </Button>
         </View>
