@@ -5,27 +5,24 @@ import TopBar from '../../components/TopBar';
 import { ScrollView } from 'react-native-gesture-handler';
 import AuthContext from '../../contexts/auth';
 
-export default function JoinGroup({ navigation }) {
+export default function Groups({ navigation }) {
   const [groups, setGroups] = useState([]);
+  const [load, setLoad] = useState(true);
   const { user } = useContext(AuthContext);
 
   useEffect(() => {
-    api.groups.list().then((response) => setGroups(response));
-  }, []);
-
-  const joinGroup = async (groupId) => {
-    await api.groups.addUser(groupId, user.id);
-    navigation.navigate('Grupos');
-  };
+    api.users.groups(user.id).then((response) => setGroups(response.data));
+    navigation.addListener('focus', () => setLoad(!load));
+  }, [load, navigation]);
 
   return (
     <>
-      <TopBar navigation={navigation} title="Entrar em um Grupo" />
+      <TopBar navigation={navigation} title="Meus Grupos" />
       <ScrollView>
         <List>
           {groups.map((group) => {
             return (
-              <ListItem key={group.id} onPress={() => joinGroup(group.id)}>
+              <ListItem key={group.id} onPress={() => console.log(group.name)}>
                 <Left>
                   <Text>{group.name}</Text>
                 </Left>
@@ -36,12 +33,15 @@ export default function JoinGroup({ navigation }) {
             );
           })}
         </List>
+        <Button block onPress={() => navigation.navigate('Criar um Grupo')}>
+          <Text>Criar Grupo</Text>
+        </Button>
         <Button
           block
           transparent
-          onPress={() => navigation.navigate('Criar um Grupo')}
+          onPress={() => navigation.navigate('Entrar em um Grupo')}
         >
-          <Text>Criar Grupo</Text>
+          <Text>Entrar em um Grupo</Text>
         </Button>
       </ScrollView>
     </>

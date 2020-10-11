@@ -10,6 +10,7 @@ import AuthContext from '../contexts/auth';
 import CreateExpense from '../pages/CreateExpense';
 import CreateGroup from '../pages/groups/CreateGroup';
 import JoinGroup from '../pages/groups/JoinGroup';
+import Groups from '../pages/groups';
 
 function CustomDrawerContent(props) {
   const { signOut } = useContext(AuthContext);
@@ -38,6 +39,7 @@ export default function AppRoutes() {
       drawerContent={(props) => <CustomDrawerContent {...props} />}
     >
       <Drawer.Screen name="Cadastrar uma Despesa" component={CreateExpense} />
+      <Drawer.Screen name="Grupos" component={Groups} />
       <Drawer.Screen name="Entrar em um Grupo" component={JoinGroup} />
       <Drawer.Screen name="Criar um Grupo" component={CreateGroup} />
     </Drawer.Navigator>
