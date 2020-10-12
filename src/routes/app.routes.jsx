@@ -1,47 +1,34 @@
-import React, { useContext } from 'react';
-import {
-  createDrawerNavigator,
-  DrawerContentScrollView,
-  DrawerItem,
-  DrawerItemList,
-} from '@react-navigation/drawer';
-import AuthContext from '../contexts/auth';
-
+import React from 'react';
+import { createStackNavigator } from '@react-navigation/stack';
 import CreateExpense from '../pages/CreateExpense';
 import CreateGroup from '../pages/groups/CreateGroup';
 import JoinGroup from '../pages/groups/JoinGroup';
 import Groups from '../pages/groups';
+import ModalComponent from '../components/Modal';
 
-function CustomDrawerContent(props) {
-  const { signOut } = useContext(AuthContext);
-  return (
-    <DrawerContentScrollView {...props}>
-      <DrawerItemList {...props} />
-      <DrawerItem
-        label="Sair"
-        onPress={() => {
-          props.navigation.closeDrawer();
-
-          signOut();
-        }}
-      />
-    </DrawerContentScrollView>
-  );
-}
-
-const Drawer = createDrawerNavigator();
+const Stack = createStackNavigator();
 
 export default function AppRoutes() {
   return (
-    <Drawer.Navigator
-      initialRouteName="Cadastrar uma Despesa"
-      drawerContentOptions={{ activeTintColor: '#3F51B5' }}
-      drawerContent={(props) => <CustomDrawerContent {...props} />}
+    <Stack.Navigator
+      screenOptions={({ navigation }) => {
+        return {
+          headerStyle: { backgroundColor: '#3F51B5' },
+          headerTitleStyle: {
+            fontWeight: 'bold',
+            color: 'white',
+          },
+          headerTintColor: '#fff',
+          headerLeft: () => {
+            return <ModalComponent navigation={navigation} />;
+          },
+        };
+      }}
     >
-      <Drawer.Screen name="Cadastrar uma Despesa" component={CreateExpense} />
-      <Drawer.Screen name="Grupos" component={Groups} />
-      <Drawer.Screen name="Entrar em um Grupo" component={JoinGroup} />
-      <Drawer.Screen name="Criar um Grupo" component={CreateGroup} />
-    </Drawer.Navigator>
+      <Stack.Screen name="Cadastrar uma Despesa" component={CreateExpense} />
+      <Stack.Screen name="Grupos" component={Groups} />
+      <Stack.Screen name="Entrar em um Grupo" component={JoinGroup} />
+      <Stack.Screen name="Criar um Grupo" component={CreateGroup} />
+    </Stack.Navigator>
   );
 }

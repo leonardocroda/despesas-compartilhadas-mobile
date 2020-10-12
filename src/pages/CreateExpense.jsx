@@ -14,7 +14,6 @@ import {
   Icon,
 } from 'native-base';
 import AuthContext from '../contexts/auth';
-import TopBar from '../components/TopBar';
 import api from '../services/api';
 
 export default function CreateExpense({ navigation }) {
@@ -46,7 +45,6 @@ export default function CreateExpense({ navigation }) {
 
   return (
     <Container>
-      <TopBar navigation={navigation} title="Criar Despesa" />
       <Content>
         <Form style={styles.form}>
           <Item floatingLabel>
@@ -110,33 +108,23 @@ export default function CreateExpense({ navigation }) {
               </>
             )}
           </View>
-        </Form>
-        <View style={styles.buttons}>
-          <Button block light style={{ width: '45%' }}>
-            <Text>Cancelar</Text>
-          </Button>
-          <Button block onPress={createExpense} style={{ width: '45%' }}>
+          <Button block onPress={createExpense} style={styles.button}>
             <Text>Salvar</Text>
           </Button>
-        </View>
+        </Form>
       </Content>
     </Container>
   );
 }
 
 const styles = StyleSheet.create({
-  buttons: {
-    marginTop: 30,
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'space-evenly',
-  },
+  button: { marginTop: 30 },
   form: {
     padding: 10,
   },
   picker: {
     marginLeft: 10,
-    marginTop: 10,
+    marginTop: 20,
     width: '95%',
   },
   pickerLabel: {

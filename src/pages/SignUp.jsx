@@ -16,12 +16,14 @@ export default function SignUp({ navigation }) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
   const submitForm = async () => {
     const data = {
       name: name,
       email: email,
       password: password,
     };
+
     try {
       api.users.create(data).then(() => navigation.navigate('Entrar'));
     } catch (e) {

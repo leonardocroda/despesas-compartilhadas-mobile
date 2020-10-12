@@ -9,9 +9,7 @@ import {
   Label,
   Button,
   Text,
-  View,
 } from 'native-base';
-import TopBar from '../../components/TopBar';
 import api from '../../services/api';
 import AuthContext from '../../contexts/auth';
 
@@ -31,22 +29,16 @@ export default function CreateGroup({ navigation }) {
 
   return (
     <Container>
-      <TopBar navigation={navigation} title="Criar um Grupo" />
       <Content>
         <Form style={styles.form}>
           <Item floatingLabel>
             <Label>Nome do Grupo</Label>
             <Input value={name} onChangeText={(value) => setName(value)} />
           </Item>
-        </Form>
-        <View style={styles.buttons}>
-          <Button block light style={styles.button}>
-            <Text>Cancelar</Text>
-          </Button>
           <Button block style={styles.button} onPress={submitForm}>
-            <Text>Salvar</Text>
+            <Text>Criar</Text>
           </Button>
-        </View>
+        </Form>
       </Content>
     </Container>
   );
@@ -54,7 +46,7 @@ export default function CreateGroup({ navigation }) {
 
 const styles = StyleSheet.create({
   button: {
-    width: '45%',
+    marginTop: 30,
   },
   buttons: {
     marginTop: 30,
